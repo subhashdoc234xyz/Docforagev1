@@ -15,12 +15,14 @@ export default function PreviewPanel({ markdown }) {
   };
 
   const handleDownload = () => {
-    const blob = new Blob([markdown], { type: "text/markdown" });
+    const blob = new Blob([markdown], { type: "text/markdown;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
     a.download = "README.md";
+    document.body.appendChild(a); // Append to body so the browser processes the download attribute properly
     a.click();
+    document.body.removeChild(a); // Clean up
     URL.revokeObjectURL(url);
   };
 
