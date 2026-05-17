@@ -121,7 +121,7 @@ export default function App() {
         setShowSettings(true);
       } else {
         setError(
-          "Failed to connect to Google Gemini. Please check if your API key is correct, verify your internet connection, or try again in a minute."
+          "Failed to connect to the AI engine. Please check if your API key is correct, verify your internet connection, or try again in a minute."
         );
       }
     } finally {
@@ -177,7 +177,7 @@ export default function App() {
                 ⚙️ API Configuration Settings
               </h3>
               <p className="text-xs text-forge-muted mb-4 leading-relaxed">
-                Provide your Google Gemini API Key to enable the README forging engine. Your key is saved locally in your own browser's <strong className="text-forge-text">localStorage</strong>.
+                Provide your API Key to enable the README forging engine. Your key is saved locally in your own browser's <strong className="text-forge-text">localStorage</strong>.
               </p>
 
               {/* Status Indicators */}
@@ -203,7 +203,7 @@ export default function App() {
               {/* Input for key */}
               <div className="flex flex-col gap-1.5 mb-6">
                 <label className="text-xs text-forge-muted font-bold uppercase tracking-wider">
-                  Gemini API Key
+                  API Key
                 </label>
                 <input
                   type="password"
@@ -247,7 +247,7 @@ export default function App() {
             Forge a <span className="text-forge-accent bg-clip-text">Professional README</span> in Seconds
           </h2>
           <p className="text-forge-muted text-sm max-w-xl mx-auto">
-            Input your code snippets or write a quick description. Let Gemini 2.5 Flash construct a beautifully formatted README ready for GitHub.
+            Input your code snippets or write a quick description. Let our advanced AI engine construct a beautifully formatted README ready for GitHub.
           </p>
         </div>
 

@@ -16,13 +16,7 @@ export default function Footer() {
 
         {/* Brand slogan & model credits */}
         <div className="flex flex-col items-center sm:items-end gap-1">
-          <p className="text-xs text-forge-muted font-medium">
-            Powered by{" "}
-            <span className="text-forge-blue font-semibold hover:underline">
-              Google Gemini 2.5 Flash
-            </span>
-          </p>
-          <span className="text-[10px] text-forge-muted/70 italic">
+          <span className="text-xs text-forge-muted/80 italic font-medium">
             "Stop writing. Start forging."
           </span>
         </div>

@@ -32,16 +32,11 @@ export default function Header({ onToggleSettings, isKeyConfigured }) {
                 ? "bg-forge-green/10 border-forge-green/30 text-forge-green glow-green"
                 : "bg-forge-accent/10 border-forge-accent/30 text-forge-accent glow"
             }`}
-            title="Click to configure your Gemini API Key"
+            title="Click to configure your AI API Key"
           >
             <span className={`w-2 h-2 rounded-full ${isKeyConfigured ? "bg-forge-green animate-pulse" : "bg-forge-accent animate-ping"}`} />
             {isKeyConfigured ? "API Connected" : "Configure API Key"}
           </button>
-
-          {/* Model info */}
-          <span className="hidden sm:inline-flex text-xs bg-forge-bg border border-forge-border text-forge-muted px-3 py-1.5 rounded-full font-medium">
-            Powered by Gemini 2.5 Flash
-          </span>
 
           {/* Settings Button */}
           <button
