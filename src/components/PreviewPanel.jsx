@@ -14,16 +14,42 @@ export default function PreviewPanel({ markdown }) {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleDownload = () => {
-    const blob = new Blob([markdown], { type: "text/markdown;charset=utf-8" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "README.md";
-    document.body.appendChild(a); // Append to body so the browser processes the download attribute properly
-    a.click();
-    document.body.removeChild(a); // Clean up
-    URL.revokeObjectURL(url);
+  const handleDownload = async () => {
+    // Check if the modern File System Access API is supported by the browser
+    if ("showSaveFilePicker" in window) {
+      try {
+        const options = {
+          suggestedName: "README.md",
+          types: [
+            {
+              description: "Markdown Files (*.md)",
+              accept: {
+                "text/markdown": [".md"],
+              },
+            },
+          ],
+        };
+        // Open the native Windows file explorer "Save As" dialog
+        const handle = await window.showSaveFilePicker(options);
+        const writable = await handle.createWritable();
+        await writable.write(markdown);
+        await writable.close();
+      } catch (err) {
+        // Handle user cancellation gracefully
+        console.log("User cancelled the save dialog or it failed", err);
+      }
+    } else {
+      // Fallback for older browsers or restricted sandboxes
+      const blob = new Blob([markdown], { type: "text/markdown;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "README.md";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
   };
 
   // Custom code renderer for markdown code blocks using Prism syntax highlighter
