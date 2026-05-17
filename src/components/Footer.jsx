@@ -7,13 +7,10 @@ export default function Footer() {
         {/* Author details */}
         <div className="text-center sm:text-left">
           <p className="text-xs text-forge-muted font-medium">
-            Built with ❤️ by{" "}
-            <span className="text-forge-accent font-semibold hover:underline">
-              Subhash B, Anandhavel K, Suresh K, Sanjai
-            </span>
+            Built with ❤️ for Developers
           </p>
           <p className="text-[10px] text-forge-muted/70 mt-0.5">
-            Team AI/ML Track · OSC AI Build 1.0
+            OSC AI Build 1.0
           </p>
         </div>
 
