@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 export default function InputPanel({ onGenerate, isLoading }) {
   const [input, setInput] = useState("");
@@ -7,56 +7,6 @@ export default function InputPanel({ onGenerate, isLoading }) {
   const handleSubmit = () => {
     if (!input.trim()) return;
     onGenerate(input, inputType);
-  };
-
-  const templates = {
-    taskflow: {
-      name: "📋 React TaskFlow",
-      type: "description",
-      content: `Project Name: TaskFlow
-Description: A lightweight task management web app for developers and small teams.
-Tech Stack: React, Node.js, Express, MongoDB, TailwindCSS, Framer Motion
-Features: Kanban board, drag-and-drop tasks, team collaboration, dark mode, REST API, JWT auth
-Target Users: Developers and small startup teams`
-    },
-    pycli: {
-      name: "🐍 Python DataCLI",
-      type: "code",
-      content: `import sys
-import pandas as pd
-
-def parse_args():
-    print("Parsing CLI arguments...")
-    # Mock CLI processor for parsing CSV data
-    return {"file": "dataset.csv", "operation": "summary"}
-
-def main():
-    """
-    DataCLI: A simple command line interface for analyzing CSV files.
-    Allows developers to fetch summary stats, filter rows, and output to JSON.
-    """
-    args = parse_args()
-    print(f"DataCLI Initialized. Loading {args['file']}...")
-    # Perform summary analytics
-
-if __name__ == "__main__":
-    main()`
-    },
-    portfolio: {
-      name: "💼 Developer Portfolio",
-      type: "description",
-      content: `Project Name: DevCanvas Portfolio
-Description: A modern, animated developer portfolio template that showcases repos, blogs, and skill radars.
-Tech Stack: Next.js, TailwindCSS, Three.js, Resend (for contact forms)
-Features: Live Github API integration, dark mode, 3D interactive model rendering, blog posts list
-Target Users: Software engineers looking for a premium resume website`
-    }
-  };
-
-  const applyTemplate = (key) => {
-    const template = templates[key];
-    setInputType(template.type);
-    setInput(template.content);
   };
 
   return (
@@ -83,22 +33,6 @@ Target Users: Software engineers looking for a premium resume website`
         >
           {"</>"} Paste Code
         </button>
-      </div>
-
-      {/* Templates / Examples Selector */}
-      <div className="flex flex-wrap items-center gap-2 bg-forge-card/35 border border-forge-border/60 rounded-lg p-2">
-        <span className="text-[10px] text-forge-muted uppercase tracking-wider font-semibold mr-1 pl-1">
-          Quick Templates:
-        </span>
-        {Object.entries(templates).map(([key, t]) => (
-          <button
-            key={key}
-            onClick={() => applyTemplate(key)}
-            className="text-xs bg-forge-bg border border-forge-border text-forge-muted hover:text-white hover:border-forge-accent hover:bg-forge-card px-2.5 py-1 rounded transition-all duration-150 cursor-pointer"
-          >
-            {t.name}
-          </button>
-        ))}
       </div>
 
       {/* Textarea Input */}
