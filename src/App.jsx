@@ -246,9 +246,6 @@ export default function App() {
           <h2 className="text-3xl font-extrabold text-white mb-2 leading-tight tracking-tight sm:text-4xl">
             Forge a <span className="text-forge-accent bg-clip-text">Professional README</span> in Seconds
           </h2>
-          <p className="text-forge-muted text-sm max-w-xl mx-auto">
-            Input your code snippets or write a quick description. Let our advanced AI engine construct a beautifully formatted README ready for GitHub.
-          </p>
         </div>
 
         {/* Action Controls for Workspace (History Toggle) */}
