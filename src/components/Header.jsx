@@ -1,6 +1,8 @@
 import React from "react";
+import { signOut } from "firebase/auth";
+import { auth } from "../firebase";
 
-export default function Header({ onToggleSettings, isKeyConfigured }) {
+export default function Header({ user, onToggleSettings, isKeyConfigured }) {
   return (
     <header className="border-b border-forge-border bg-forge-card/85 backdrop-blur px-6 py-4 sticky top-0 z-40">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -47,6 +49,22 @@ export default function Header({ onToggleSettings, isKeyConfigured }) {
           >
             ⚙️
           </button>
+
+          {/* Firebase Authentication User Section */}
+          {user && (
+            <>
+              <div className="w-[1px] h-5 bg-forge-border mx-1 hidden sm:block" />
+              <span className="text-xs text-forge-muted hidden sm:block font-medium">
+                {user.email}
+              </span>
+              <button
+                onClick={() => signOut(auth)}
+                className="text-xs bg-forge-bg border border-forge-border text-forge-muted hover:text-white hover:border-forge-accent hover:bg-forge-card px-3 py-1.5 rounded-full transition-all cursor-pointer font-semibold"
+              >
+                Sign Out
+              </button>
+            </>
+          )}
         </div>
       </div>
     </header>

@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase";
 import Header from "./components/Header";
 import InputPanel from "./components/InputPanel";
 import PreviewPanel from "./components/PreviewPanel";
 import Footer from "./components/Footer";
+import AuthPage from "./components/AuthPage";
 import { generateREADME } from "./utils/gemini";
 
 export default function App() {
+  // --- Auth States ---
+  const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
+
   // --- States ---
   const [markdown, setMarkdown] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -41,6 +48,33 @@ export default function App() {
       }
     }
   }, []);
+
+  // Listen for auth state changes
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (u) => {
+      setUser(u);
+      setAuthLoading(false);
+    });
+    return () => unsub();
+  }, []);
+
+  // Show loading spinner while checking auth
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-forge-bg flex items-center justify-center">
+        <div className="flex items-center gap-3 text-forge-muted text-sm font-semibold select-none">
+          <svg className="animate-spin h-5 w-5 text-forge-accent" viewBox="0 0 24 24" fill="none">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"/>
+          </svg>
+          Loading DocForge...
+        </div>
+      </div>
+    );
+  }
+
+  // If not logged in show auth page
+  if (!user) return <AuthPage />;
 
   // Save API Key changes
   const handleSaveKey = (key) => {
@@ -157,6 +191,7 @@ export default function App() {
     <div className="min-h-screen flex flex-col bg-forge-bg text-forge-text font-sans transition-all duration-300">
       {/* Header component */}
       <Header
+        user={user}
         onToggleSettings={() => setShowSettings(!showSettings)}
         isKeyConfigured={isKeyConfigured}
       />
